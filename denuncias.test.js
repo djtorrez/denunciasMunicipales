@@ -5,70 +5,53 @@ import server from './server';
 chai.use(chaiHttp);
 
 describe('Denuncias Municipales', () => {
-    it('Devuelve una lista de denuncias', (done) => {
-        chai.request(server)
-            .get('/denuncias')
-            .end((err, res) => {
-                chai.expect(res).to.have.status(200);
-                chai.expect(res.body).to.be.an('array');
-                done();
-            });
+    it('Devuelve una lista de denuncias', async () => {
+        const response = await chai.request(server).get('/denuncias');
+
+        chai.expect(response).to.have.status(200);
+        chai.expect(response.body).to.be.an('array');
     });
 
-    it('Devuelve una denuncia específica', (done) => {
-        chai.request(server)
-            .get('/denuncias/1')
-            .end((err, res) => {
-                chai.expect(res).to.have.status(200);
-                chai.expect(res.body).to.have.property('id');
-                chai.expect(res.body).to.have.property('titulo');
-                chai.expect(res.body).to.have.property('descripcion');
-                done();
-            });
+    it('Devuelve una denuncia específica', async () => {
+        const response = await chai.request(server).get('/denuncias/1');
+
+        chai.expect(response).to.have.status(200);
+        chai.expect(response.body).to.have.property('id');
+        chai.expect(response.body).to.have.property('titulo');
+        chai.expect(response.body).to.have.property('descripcion');
     });
 
-    it('Crea una nueva denuncia', (done) => {
+    it('Crea una nueva denuncia', async () => {
         const body = {
             titulo: 'Denuncia de prueba',
             descripcion: 'Esta es una denuncia de prueba.',
         };
 
-        chai.request(server)
-            .post('/denuncias')
-            .send(body)
-            .end((err, res) => {
-                chai.expect(res).to.have.status(201);
-                chai.expect(res.body).to.have.property('id');
-                chai.expect(res.body).to.have.property('titulo');
-                chai.expect(res.body).to.have.property('descripcion');
-                done();
-            });
+        const response = await chai.request(server).post('/denuncias').send(body);
+
+        chai.expect(response).to.have.status(201);
+        chai.expect(response.body).to.have.property('id');
+        chai.expect(response.body).to.have.property('titulo');
+        chai.expect(response.body).to.have.property('descripcion');
     });
 
-    it('Actualiza una denuncia existente', (done) => {
+    it('Actualiza una denuncia existente', async () => {
         const body = {
             titulo: 'Denuncia actualizada',
             descripcion: 'Esta es una denuncia actualizada.',
         };
 
-        chai.request(server)
-            .patch('/denuncias/1')
-            .send(body)
-            .end((err, res) => {
-                chai.expect(res).to.have.status(200);
-                chai.expect(res.body).to.have.property('id');
-                chai.expect(res.body).to.have.property('titulo');
-                chai.expect(res.body).to.have.property('descripcion');
-                done();
-            });
+        const response = await chai.request(server).patch('/denuncias/1').send(body);
+
+        chai.expect(response).to.have.status(200);
+        chai.expect(response.body).to.have.property('id');
+        chai.expect(response.body).to.have.property('titulo');
+        chai.expect(response.body).to.have.property('descripcion');
     });
 
-    it('Elimina una denuncia existente', (done) => {
-        chai.request(server)
-            .delete('/denuncias/1')
-            .end((err, res) => {
-                chai.expect(res).to.have.status(204);
-                done();
-            });
+    it('Elimina una denuncia existente', async () => {
+        const response = await chai.request(server).delete('/denuncias/1');
+
+        chai.expect(response).to.have.status(204);
     });
 });
