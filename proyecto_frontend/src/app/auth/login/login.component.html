@@ -1,0 +1,14 @@
+
+<div class="bg-success d-flex justify-content-center align-items-center vh-100">
+    <div *ngIf="loading">
+      <app-spinner></app-spinner>
+    </div>
+    <div *ngIf="!loading" class="login-container">
+        <h2>Iniciar sesión</h2>
+        <form [formGroup]="authForm" (ngSubmit)="login()" >
+            <input type="text" formControlName="username" placeholder="Usuario" required>
+            <input type="password" formControlName="password" placeholder="Contraseña" required>
+            <input type="submit" value="Ingresar">
+        </form>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+
+
+
+node_modules/
+.env
+Dockerfile
+fly.toml
+google-services.json
+privateKey.json
+topic-vision.json

@@ -1,0 +1,61 @@
+<div class="container text-center">
+  <div class="row justify-content-evenly">
+    <div class="col-3">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Fecha ini</span>
+        <input type="datetime-local" class="form-control" [(ngModel)]="fechaIni">
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Fecha Fin</span>
+        <input type="datetime-local" class="form-control" [(ngModel)]="fechaFin">
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Options</label>
+        <select class="form-select" (change)="changeOption($event)" id="inputGroupSelect01">
+          <option selected>Choose...</option>
+          <option *ngFor="let option of options" [value]=option.id>{{option.valor}}</option>
+        </select>
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="filtrar()">Filtrar</button>
+      </div>
+    </div>
+    <div class="col-3">
+      <div *ngIf="showEstados">
+        <div *ngFor="let estado of estados" class="row gy-1" role="group"
+          aria-label="Vertical radio toggle button group">
+          <!-- <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked> -->
+          <div class="col-6">
+            <label for="vbtn-radio1">{{estado.name}}</label>
+          </div>
+          <div class="col-6">
+            <input type="radio" value="{{estado.name}}" id="{{estado.id}}" name="vbtn-radio" id="vbtn-radio2"
+              [(ngModel)]="estadSelected" autocomplete="off">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loading" class="container text-center">
+  <app-spinner></app-spinner>
+</div>
+
+<google-map *ngIf="!loading" width="100%" height="550" [center]="center" [zoom]="zoom">
+  <ng-container *ngFor="let marcador of listaMarcadores">
+    <map-marker #marker="mapMarker" [position]="marcador.position" [options]="marcador.options"
+      (mapClick)="openInfoWindow(marker,infoWindow)">
+    </map-marker>
+
+    <map-info-window #infoWindow="mapInfoWindow" [options]="{ maxWidth: 200 }">
+      <strong>{{marcador.reclamo.titulo}}</strong><br>
+      <p>{{marcador.reclamo.descripcion}}</p> <br>
+      <p>{{marcador.reclamo.posicion![0]}},{{marcador.reclamo.posicion![1]}}</p> <a [routerLink]="['/dashboard/getreclamo',marcador.reclamo.id]"><i
+          class="fa-solid fa-eye"></i> Ver detalle del reclamo</a>
+    </map-info-window>
+  </ng-container>
+
+</google-map>

@@ -1,0 +1,25 @@
+<p>detalle de area</p>
+
+<div *ngIf="area" class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{area.nombre}}</h5>
+      <div *ngIf="area.categorias!.length!=0" >
+        <ul *ngFor="let cat  of area.categorias " class="list-group list-group-flush">
+            <li class="list-group-item">{{cat}}</li>
+          </ul>
+      </div>
+      <div *ngIf="area.categorias!.length==0" >
+        <p> no tiene categorias asignadas</p>
+      </div>
+      <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupSelect01">añadir categoria</label>
+          <select [(ngModel)]="categoria" class="form-select" id="inputGroupSelect01">
+            <ng-container *ngFor="let categoria of categorias" >
+                <option value="{{categoria.nombre}}">{{categoria.nombre}}</option>
+            </ng-container>
+          </select>
+          <button (click)="addCategoriaAlArea()" class="btn btn-outline-secondary" type="button" id="button-addon2" >guardar</button>
+      </div>
+
+    </div>
+</div>

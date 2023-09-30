@@ -1,0 +1,109 @@
+<div *ngIf="loading" class="container text-center">
+  <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="!loading" class="d-flex justify-content-center">
+  <div class="p-2">
+    <div class="card" style="width: 18rem;">
+      <div class="card-header bg-dark text-light">
+        <h5 class="card-title">Fotos</h5>
+      </div>
+      <img *ngFor="let foto of fotos" src="{{foto}}" class="card-img-top" alt="...">
+    </div>
+  </div>
+  <div class="p-2">
+    <div class="card" style="width: 18rem;">
+      <div class="card-header bg-dark text-light">
+        <h5 class="card-title">Info Reclamo</h5>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{reclamo.titulo }}</h5>
+        <p class="card-text"><strong>Descripcion: </strong> {{reclamo.descripcion}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Categoria: </strong>{{reclamo.categoria}}
+        </li>
+        <li class="list-group-item"><strong>Estado: </strong>{{reclamo.estado}} <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false"
+              style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .50rem;">
+              New Estado
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="changeEstado('aceptado',user.phoneToken!)">Aceptada</a></li>
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="changeEstado('rechazado',user.phoneToken!)">Rechazada</a>
+              </li>
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="changeEstado('en proceso',user.phoneToken!)">En
+                  Curso</a></li>
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="changeEstado('Finalizada',user.phoneToken!)">Finalizada</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="list-group-item" *ngIf="reclamo.fecha!.seconds!"><strong>Fecha: </strong>{{
+          reclamo.fecha!.seconds!*1000 | date }}</li>
+        <li class="list-group-item" *ngIf="reclamo.fecha!._seconds!"><strong>Fecha: </strong>{{
+          reclamo.fecha!._seconds!*1000 | date }}</li>
+        <li class="list-group-item"><strong>Area: </strong>{{reclamo.area}}
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false"
+              style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .50rem;">
+              Change Area
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="changeArea('Alumbrado')">Alumbrado</a>
+              </li>
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="changeArea('Caminos')">Caminos</a>
+              </li>
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="changeArea('Seguridad')">Seguridad</a></li>
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="changeArea('Basura')">Basura</a></li>
+            </ul>
+          </div>
+        </li>
+        <li *ngIf="reclamo.comentario != '' " class="list-group-item"><strong>comentario: </strong>{{ reclamo.comentario }}</li>
+        <li *ngIf="reclamo.comentario == '' " class="list-group-item"> <div class="form-floating">
+          <textarea [(ngModel)]="comentario" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+          <label for="floatingTextarea">Comments</label>
+        </div>  <button class="btn btn-secondary" type="button" (click)="dejarComentario(user.phoneToken!)"
+          aria-expanded="false"
+          style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .50rem;">
+          Comentar
+        </button></li>
+      </ul>
+    </div>
+  </div>
+  <div class="p-2">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <div class="card-header bg-dark text-light">
+          <h5 class="card-title">Posicion en el Mapa</h5>
+        </div>
+        <google-map width="100%" height="250" [center]="center.position" [zoom]="zoom">
+          <map-marker #marker="mapMarker" [position]="center.position" [options]="options">
+          </map-marker>
+        </google-map>
+      </div>
+    </div>
+  </div>
+  <div class="p-2">
+    <div *ngIf="user" class="card" style="width: 18rem;">
+      <div class="card-header bg-dark text-light">
+        <h5 class="card-title">Info Usuario</h5>
+      </div>
+      <div class="card-body">
+        <img src="{{user.avatar}}"
+                alt="Avatar" class="card-img-top" />
+        <!-- <h5 class="card-title">{{user.name }}</h5> -->
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong><i class="fa-solid fa-user"></i> Nombre: </strong>{{user.name}}
+        </li>
+        <li class="list-group-item"><strong><i class="fa-solid fa-envelope"></i> Email: </strong>{{user.email}}
+        </li>
+        <li class="list-group-item"><strong><i class="fa-solid fa-mobile-screen-button"></i> Telefono: </strong>{{user.telefono}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

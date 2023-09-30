@@ -1,0 +1,21 @@
+<body>
+  <div class="message_box_label">
+    Chat GPT Messages
+  </div>
+  <div id="chat-container">
+    <!-- Aquí se mostrarán los mensajes del chat -->
+    <!-- *ngIf="animationComplete" -->
+    <div *ngFor="let word of palabras">
+      <p class="text_chat">{{ word.user }}: {{word.msg}}</p>
+    </div>
+    <div *ngIf="spinner" class="spinner">
+      <app-spinner></app-spinner>
+    </div>
+    <p *ngIf="animationComplete" id="typing_text">{{ typedText }}</p>
+    <!-- <span>hola</span> -->
+  </div>
+  <form [formGroup]="formChat" (submit)="efectoTyping()" id="chat-form">
+    <textarea id="chat-input" #chatInput formControlName="texto" placeholder="Escribe un mensaje"></textarea>
+    <button class="block-btn-green" type="submit">Enviar</button>
+  </form>
+</body>

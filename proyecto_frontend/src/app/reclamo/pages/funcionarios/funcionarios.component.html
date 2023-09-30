@@ -1,0 +1,84 @@
+<div *ngIf="loading" class="container text-center" >
+  <app-spinner></app-spinner>
+</div>
+<button class="btn btn-success" (click)="botonAddc()" nombre="add" id="add">+ funcionario</button>
+  <br><br>
+  <div *ngIf="esconderAdd">
+  <div >
+    <form action="">
+      <label >seleccionar area</label>
+      <br>
+      <select [(ngModel)]="area" value="area" type="text" name="area" id="area">
+        <ng-container *ngFor="let area of areas" >
+          <option value="{{area.nombre}}">{{area.nombre}}</option>
+      </ng-container>
+      </select>
+      <br><br>
+      <input [(ngModel)]="nombre" placeholder="nombre" type="text" name="nombre" id="nombre">
+      <br><br>
+      <input [(ngModel)]="telefono" placeholder="telefono" type="text" name="telefono" id="telefono">
+      <br><br>
+      <input [(ngModel)]="username" placeholder="username" type="text" name="username" id="username">
+      <br><br>
+      <input [(ngModel)]="email" placeholder="email" type="text" name="email" id="email">
+      <br><br>
+      <input [(ngModel)]="password" placeholder="password" type="text" name="password" id="password">
+      <br><br>
+      <br>
+      <button (click)="addFuncionario()" >Guardar</button>
+    </form>
+  </div>
+</div>
+<table *ngIf="!loading" class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Area</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">telefono</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th scope="col">Admin</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let funcionario of funcionarios">
+      <td>{{funcionario.id}}</td>
+      <td>{{funcionario.area}}</td>
+      <td>{{funcionario.nombre}}</td>
+      <td>{{funcionario.telefono}}</td>
+      <td>{{funcionario.username}}</td>
+      <td>{{funcionario.email}}</td>
+      <td>{{funcionario.superadmin}}</td>
+      <td>
+        <button (click)="abrirFormularioParaEditar(funcionario.id!,funcionario.area!,funcionario.nombre!,funcionario.telefono!,funcionario.username!,funcionario.email!,funcionario.password!)" class="btn btn-info">Edit</button></td>
+      <td><button (click)="eliminarFuncionario(funcionario.id!)" class="btn btn-danger"  nombre="delete" id="delete">delete</button></td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="formulario">
+    <form action="">
+      <label >seleccionar area</label>
+      <br>
+      <select [(ngModel)]="area" value="area" type="text" name="area" id="area">
+        <ng-container *ngFor="let area of areas" >
+          <option value="{{area.nombre}}">{{area.nombre}}</option>
+      </ng-container>
+      </select>
+     <!-- <input [(ngModel)]="area" placeholder="area" type="text" name="area" id="area">-->
+      <br><br>
+      <input [(ngModel)]="nombre" placeholder="nombre" type="text" name="nombre" id="nombre">
+      <br><br>
+      <input [(ngModel)]="telefono" placeholder="telefono" type="text" name="telefono" id="telefono">
+      <br><br>
+      <input [(ngModel)]="username" placeholder="username" type="text" name="username" id="username">
+      <br><br>
+      <input [(ngModel)]="email" placeholder="email" type="text" name="email" id="email">
+      <br><br>
+      <input [(ngModel)]="password" placeholder="password" type="text" name="password" id="password">
+      <br><br>
+      <br>
+      <button (click)="guardarCambios()">Guardar</button>
+    </form>
+  </div>

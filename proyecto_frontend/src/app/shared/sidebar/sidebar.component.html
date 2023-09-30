@@ -1,0 +1,13 @@
+<div class="side-nav-content">
+  <ul class="nav-list" [ngClass]="{'nav-list-open': sideNavStatus}">
+    <ng-container *ngFor="let item of list">
+      <li *ngIf="item.admin==funcionario.superadmin" class="nav-list-item">
+        <i class="{{item.icon}}"></i>
+        <span>
+          <a href="" [routerLink]="[item.path]" >{{item.name}}</a>
+        </span>
+      </li>
+    </ng-container>
+    
+  </ul>
+</div>

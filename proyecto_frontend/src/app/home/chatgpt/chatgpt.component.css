@@ -1,0 +1,140 @@
+/* p {
+    display: block;
+    font-family: monospace;
+    white-space: nowrap;
+    border-right: 4px solid;
+    width: 25ch;
+    animation: typing 5s steps(25), blink .5s infinite step-end alternate;
+    overflow: hidden;
+}
+
+@keyframes typing {
+    from {width: 0;}
+}
+@keyframes blink {
+    50% {border: transparent;}
+} */
+#typing_text {
+  /* width: 25ch; */
+  overflow: hidden;
+  /* Para ocultar el texto original */
+
+  border-right: .15em solid;
+  /* Para crear el cursor */
+  /* font-size: 2em; */
+  font-family: monospace;
+  /* font-weight: bold; */
+  letter-spacing: .15em;
+}
+
+.text_chat {
+  font-family: monospace;
+  border-right: .15em solid;
+  letter-spacing: .15em;
+}
+
+.typing {
+  animation: typing 5s steps(30, end), blink-caret .5s step-end infinite;
+}
+
+/* Animación de escribir */
+@keyframes typing {
+  from {
+    width: 0
+  }
+
+  to {
+    width: 100%
+  }
+}
+
+/* Animación del cursor */
+@keyframes blink-caret {
+
+  from,
+  to {
+    border-color: transparent
+  }
+
+  50% {
+    border-color: orange
+  }
+}
+
+.message_box_label {
+  background-color: dodgerblue;
+  padding: 13px;
+  color: white;
+  font-size: 17px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+#chat-container {
+  width: 100%;
+  height: 500px;
+  background-color: #bfe8f4;
+  overflow-y: scroll;
+  /* border-radius: 15px; */
+  /* border-bottom: 4px; */
+  border-bottom-left-radius: 10px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+#chat-container p {
+  padding: 10px;
+  margin: 10px;
+  background-color: #ddd;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+#chat-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  /* border-top: 1px solid #ddd; */
+  box-sizing: border-box;
+  font-size: 16px;
+  resize: none;
+  margin: 8px 0;
+  outline: none;
+}
+
+#chat-input:focus {
+  border-color: dodgerblue;
+  box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+#chat-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+
+
+.spinner {
+  margin-left: 5px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.block-btn-green {
+  width: 100px;
+  height: 50px;
+  margin-left: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-family: monospace;
+  background: linear-gradient(145deg, #67b69e, #7ad8bb);
+  box-shadow: 6px 6px 20px -1px #61ac95,
+    -6px -6px 20px -1px #83e8c9;
+}

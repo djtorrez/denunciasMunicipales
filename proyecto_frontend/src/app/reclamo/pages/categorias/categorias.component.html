@@ -1,0 +1,47 @@
+<div *ngIf="loading" class="container text-center" >
+  <app-spinner></app-spinner>
+</div>
+<button class="btn btn-success" (click)="botonAddc()" nombre="add" id="add">+ categoria</button>
+<br><br>
+<div *ngIf="esconderAdd">
+  <form action="">
+    <input [(ngModel)]="nombre" placeholder="nombre" type="text" name="name" id="nuevoNombre">
+    <br><br>
+    <input [(ngModel)]="descripcion" placeholder="descripcion" type="text" name="descrip" id="nuevaDescripcion">
+    <br><br>
+    <br>
+    <button (click)="addCategoria()">Guardar</button>
+  </form>
+</div>
+<table *ngIf="!loading" class="table">
+  <thead>
+    <tr>
+      <th scope="col">UID</th>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let categoria of categorias">
+      <td>{{categoria.uid}}</td>
+      <td>{{categoria.id}}</td>
+      <td>{{categoria.nombre}}</td>
+      <td>{{categoria.descripcion}}</td>
+      <td><button class="btn btn-info" (click)="abrirFormularioParaEditar(categoria.uid!,categoria.nombre!,categoria.descripcion!)">Editar</button></td>
+      <td><button class="btn btn-danger" (click)="eliminarCategoria(categoria.uid!)" nombre="delete" id="delete">eliminar</button></td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="formulario">
+  <form action="">
+    <input [(ngModel)]="nombre" placeholder="nuevo nombre" type="text" name="name" id="nuevoNombre">
+    <br><br>
+    <input [(ngModel)]="descripcion" placeholder="nueva descripcion" type="text" name="descrip" id="nuevaDescripcion">
+    <br><br>
+    <br>
+    <button (click)="guardarCambios()">Guardar</button>
+  </form>
+</div>
+

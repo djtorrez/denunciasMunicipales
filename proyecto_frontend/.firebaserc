@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "prueba-438c5": {
+      "hosting": {
+        "proyecto-topicos": [
+          "prueba-438c5"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "prueba-438c5"
+  }
+}
